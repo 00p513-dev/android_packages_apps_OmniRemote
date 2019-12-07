@@ -13,18 +13,16 @@
     <string name="stop_failed">Stop failed</string>
     <string name="starting">Starting\u2026</string>
     <string name="stopping">Stopping\u2026</string>
-    <string name="status_title">Status</string>
-    <string name="interface_title">Interface</string>
-    <string name="port_title">Port</string>
+    <string name="status_title">Status:</string>
+    <string name="interface_title">IP address:</string>
+    <string name="port_title">Port:</string>
     <string name="status_running">Running</string>
-    <string name="password_title">Password</string>
+    <string name="password_title">Password:</string>
     <string name="create_passwd_failed">Create password failed</string>
     <string name="default_port">5900</string>
     <string name="default_password">No password</string>
-    <string name="disconnect_time_title">Connect timeout</string>
-    <string name="default_disconnect_time">0 = Never</string>
-    <string name="default_more_params">Oher params</string>
-    <string name="more_params_tile">More</string>
+    <string name="default_more_params">More parameters</string>
+    <string name="more_params_tile">More:</string>
     <string name="more_param_help"><![CDATA[<p>Parameters can be turned on with -&lt;param&gt;
   <br>Parameters with value must be specified as -&lt;param&gt;=&lt;value&gt;
   <br>Parameter names are case-insensitive.
@@ -83,10 +81,9 @@
 </p>]]>
 </string>
     <string name="help_activity_title">Parameters</string>
-    <string name="pid_title">Pid</string>
-    <string name="idle_time_title">Idle timeout</string>
-    <string name="default_idle_time">0 = Never</string>
-    <string name="frame_rate_title">Frame rate</string>
-    <string name="default_frame_rate">60</string>
+    <string name="pid_title">Pid:</string>
     <string name="cmd_line_dialog_title">Command Line</string>
+    <string name="params_header_tile">Server parameters</string>
+    <string name="status_header_tile">VNC server</string>
+
 </resources>

@@ -1,5 +1,6 @@
 package org.omnirom.omniremote;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private static final String TAG = Utils.TAG;
     private Handler mHandler = new Handler();
     private List<String> mParameters = new ArrayList<>();
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setElevation(0);
+        getActionBar().setElevation(0);
 
         findViewById(R.id.start_button_float).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,11 +209,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateButton() {
         if (Utils.isRunning(this)) {
-            ((ImageView) findViewById(R.id.start_button_float)).setBackgroundTintList(
-                    getColorStateList(R.color.power_on_color));
+            ((ImageView) findViewById(R.id.start_button_float)).setBackgroundResource(R.drawable.power_on);
         } else {
-            ((ImageView) findViewById(R.id.start_button_float)).setBackgroundTintList(
-                    getColorStateList(R.color.power_off_color));
+            ((ImageView) findViewById(R.id.start_button_float)).setBackgroundResource(R.drawable.power_off);
         }
     }
 
@@ -233,13 +232,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setConnectedMessage() {
         if (Utils.isRunning(this)) {
-            ((TextView) findViewById(R.id.interface_text)).setText(Utils.getIPAddress());
-            ((TextView) findViewById(R.id.port_text)).setText(getPort());
-            ((TextView) findViewById(R.id.password_text)).setText(getPassword());
+            ((TextView) findViewById(R.id.interface_text)).setText(Utils.getIPAddress() + " : " + getPort());
         } else {
             ((TextView) findViewById(R.id.interface_text)).setText("");
-            ((TextView) findViewById(R.id.port_text)).setText("");
-            ((TextView) findViewById(R.id.password_text)).setText("");
         }
     }
 
@@ -252,10 +247,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("port", ((TextView) findViewById(R.id.port_edit)).getText().toString());
         editor.putString("password", ((TextView) findViewById(R.id.password_edit)).getText().toString());
-        editor.putString("disconnect_time", ((TextView) findViewById(R.id.disconnect_time_edit)).getText().toString());
         editor.putString("more", ((TextView) findViewById(R.id.more_params_edit)).getText().toString().trim());
-        editor.putString("idle_time", ((TextView) findViewById(R.id.idle_time_edit)).getText().toString());
-        editor.putString("frame_rate", ((TextView) findViewById(R.id.frame_rate_edit)).getText().toString());
         editor.commit();
     }
 
@@ -263,10 +255,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         ((TextView) findViewById(R.id.port_edit)).setText(prefs.getString("port", ""));
         ((TextView) findViewById(R.id.password_edit)).setText(prefs.getString("password", ""));
-        ((TextView) findViewById(R.id.disconnect_time_edit)).setText(prefs.getString("disconnect_time", ""));
         ((TextView) findViewById(R.id.more_params_edit)).setText(prefs.getString("more", ""));
-        ((TextView) findViewById(R.id.idle_time_edit)).setText(prefs.getString("idle_time", ""));
-        ((TextView) findViewById(R.id.frame_rate_edit)).setText(prefs.getString("frame_rate", ""));
     }
 
     private void updateStatus() {
@@ -313,18 +302,6 @@ public class MainActivity extends AppCompatActivity {
             mParameters.add("-PasswordFile=" + Utils.getPasswordPath(this).getAbsolutePath());
         } else {
             mParameters.add("-SecurityTypes=None");
-        }
-        String disconnectTimeout = ((EditText) findViewById(R.id.disconnect_time_edit)).getText().toString();
-        if (!TextUtils.isEmpty(disconnectTimeout)) {
-            mParameters.add("-MaxDisconnectionTime=" + disconnectTimeout);
-        }
-        String idleTimeout = ((EditText) findViewById(R.id.idle_time_edit)).getText().toString();
-        if (!TextUtils.isEmpty(idleTimeout)) {
-            mParameters.add("-MaxIdleTime=" + idleTimeout);
-        }
-        String frameRate = ((EditText) findViewById(R.id.frame_rate_edit)).getText().toString();
-        if (!TextUtils.isEmpty(frameRate)) {
-            mParameters.add("-FrameRate=" + frameRate);
         }
         String moreParams = ((EditText) findViewById(R.id.more_params_edit)).getText().toString().trim();
         if (!TextUtils.isEmpty(moreParams)) {
