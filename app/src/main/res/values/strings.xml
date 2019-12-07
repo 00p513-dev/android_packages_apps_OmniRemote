@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">OmniRemote</string>
+    <string name="header_text">Start or stop vncserver</string>
+    <string name="start_button">Start</string>
+    <string name="permission_not_granted">Storage permissions needed</string>
+    <string name="stop_server">Stop</string>
+    <string name="start_server">Start</string>
+    <string name="status_stopped">Stopped</string>
+    <string name="install_failed">Installation failed</string>
+    <string name="start_failed">Start failed</string>
+    <string name="not_connected">Not connected</string>
+    <string name="connect_text">Connect to</string>
+    <string name="stop_failed">Stop failed</string>
+    <string name="starting">Starting\u2026</string>
+    <string name="stopping">Stopping\u2026</string>
+    <string name="status_title">Status</string>
+    <string name="interface_title">Interface</string>
+    <string name="port_title">Port</string>
+    <string name="status_running">Running</string>
+    <string name="password_title">Password</string>
+    <string name="create_passwd_failed">Create password failed</string>
+    <string name="default_port">5900</string>
+    <string name="default_password">No password</string>
+    <string name="disconnect_time_title">Connect timeout</string>
+    <string name="default_disconnect_time">0 = Never</string>
+    <string name="default_more_params">Oher params</string>
+    <string name="more_params_tile">More</string>
+    <string name="more_param_help"><![CDATA[<p>Parameters can be turned on with -&lt;param&gt;
+  <br>Parameters with value must be specified as -&lt;param&gt;=&lt;value&gt;
+  <br>Parameter names are case-insensitive.
+  <br>
+  <br>ZlibLevel - Zlib compression level 0-9 (default=6)
+  <br>
+  <br>ImprovedHextile - Use improved compression algorithm for Hextile encoding which achieves better compression ratios by the cost of using more CPU time (default=1)
+  <br>
+  <br>SendCutText - Send clipboard changes to clients. (default=1)
+  <br>
+  <br>AcceptCutText - Accept clipboard updates from clients. (default=1)
+  <br>
+  <br>AcceptPointerEvents - Accept pointer press and release events from clients. (default=1)
+  <br>
+  <br>AcceptKeyEvents - Accept key press and release events from clients. (default=1)
+  <br>
+  <br>DisconnectClients - Disconnect existing clients if an incoming connection is non-shared. If combined with NeverShared then new connections will be refused while there is a client active (default=1)
+  <br>
+  <br>NeverShared - Never treat incoming connections as shared, regardless of the client-specified setting (default=0)
+  <br>
+  <br>AlwaysShared - Always treat incoming connections as shared, regardless of the client-specified setting (default=0)
+  <br>
+  <br>Protocol3.3 - Always use protocol version 3.3 for backwards compatibility with badly-behaved clients (default=0)
+  <br>
+  <br>FrameRate - The maximum number of updates per second sent to each client (default=60)
+  <br>
+  <br>CompareFB - Perform pixel comparison on framebuffer to reduce unnecessary updates (0: never, 1: always, 2: auto) (default=2)
+  <br>
+  <br>ClientWaitTimeMillis - The number of milliseconds to wait for a client which is no longer responding (default=20000)
+  <br>
+  <br>MaxIdleTime - Terminate after s seconds of user inactivity (default=0)
+  <br>
+  <br>MaxConnectionTime - Terminate when a client has been connected for s seconds (default=0)
+  <br>
+  <br>MaxDisconnectionTime - Terminate when no client has been connected for s seconds (default=0)
+  <br>
+  <br>IdleTimeout - The number of seconds after which an idle VNC connection will be dropped (zero means no timeout) (default=0)
+  <br>
+  <br>MaxCutText - Maximum permitted length of an incoming clipboard update (default=262144)
+  <br>
+  <br>RemapKeys - Comma-separated list of incoming keysyms to remap. Mappings are expressed as two hex values, prefixed by 0x, and separated by -&gt; (default=)
+  <br>
+  <br>BlacklistTimeout - The initial timeout applied when a host is first black-listed. The host cannot re-attempt a connection until the timeout expires. (default=10)
+  <br>
+  <br>BlacklistThreshold - The number of unauthenticated connection attempts allowed from any individual host before that host is black-listed (default=5)
+  <br>
+  <br>UseBlacklist - Temporarily reject connections from a host if it repeatedly fails to authenticate. (default=1)
+  <br>
+  <br>Log - Specifies which log output should be directed to which target logger, and the level of output to log. Format is &lt;log&gt;:&lt;target&gt;:&lt;level&gt;[, ...]. (default=)
+  <br>
+  <br>UseIPv6 - Use IPv6 for incoming and outgoing connections. (default=1)
+  <br>
+  <br>UseIPv4 - Use IPv4 for incoming and outgoing connections. (default=1)
+  <br>
+  <br>rfbport - TCP port to listen for RFB protocol (default=5900)
+</p>]]>
+</string>
+    <string name="help_activity_title">Parameters</string>
+    <string name="pid_title">Pid</string>
+    <string name="idle_time_title">Idle timeout</string>
+    <string name="default_idle_time">0 = Never</string>
+    <string name="frame_rate_title">Frame rate</string>
+    <string name="default_frame_rate">60</string>
+    <string name="cmd_line_dialog_title">Command Line</string>
+</resources>

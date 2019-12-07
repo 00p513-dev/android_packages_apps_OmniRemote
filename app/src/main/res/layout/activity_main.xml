@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="org.omnirom.omniremote.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TableLayout
+                android:id="@+id/status_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1,3">
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/TableContentTitleWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/table_column_height"
+                        android:text="@string/status_title" />
+
+                    <TextView
+                        android:id="@+id/status_text"
+                        style="@style/TableContentTextWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/table_column_margin" />
+
+                    <TextView
+                        style="@style/TableContentTitleWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/table_column_height"
+                        android:text="@string/pid_title" />
+
+                    <TextView
+                        android:id="@+id/pid_text"
+                        style="@style/TableContentTextWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/table_column_margin" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/TableContentTitleWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/table_column_height"
+                        android:text="@string/interface_title" />
+
+                    <TextView
+                        android:id="@+id/interface_text"
+                        style="@style/TableContentTextWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/table_column_margin" />
+
+                    <TextView
+                        style="@style/TableContentTitleWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/table_column_height"
+                        android:text="@string/port_title" />
+
+                    <TextView
+                        android:id="@+id/port_text"
+                        style="@style/TableContentTextWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/table_column_margin" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/TableContentTitleWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/table_column_height"
+                        android:text="@string/password_title"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:id="@+id/password_text"
+                        style="@style/TableContentTextWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/table_column_margin"
+                        android:visibility="invisible"/>
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/table_column_height" />
+
+                    <ImageView
+                        android:id="@+id/cmd_line_info"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center_vertical|end"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_info_outline"
+                        android:tint="@android:color/white" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fadeScrollbars="false"
+                android:scrollbarStyle="insideInset">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="96dp">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:stretchColumns="1">
+
+                        <TableRow>
+
+                            <TextView
+                                style="@style/TableContentTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/table_column_height"
+                                android:text="@string/port_title" />
+
+                            <EditText
+                                android:id="@+id/port_edit"
+                                style="@style/TableContentEditText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/table_column_height"
+                                android:layout_marginStart="@dimen/table_column_margin"
+                                android:hint="@string/default_port"
+                                android:inputType="number" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                style="@style/TableContentTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/table_column_height"
+                                android:text="@string/password_title" />
+
+                            <EditText
+                                android:id="@+id/password_edit"
+                                style="@style/TableContentEditText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/table_column_height"
+                                android:layout_marginStart="@dimen/table_column_margin"
+                                android:hint="@string/default_password"
+                                android:inputType="textPassword" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                style="@style/TableContentTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/table_column_height"
+                                android:text="@string/disconnect_time_title" />
+
+                            <EditText
+                                android:id="@+id/disconnect_time_edit"
+                                style="@style/TableContentEditText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/table_column_height"
+                                android:layout_marginStart="@dimen/table_column_margin"
+                                android:hint="@string/default_disconnect_time"
+                                android:inputType="number" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                style="@style/TableContentTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/table_column_height"
+                                android:text="@string/idle_time_title" />
+
+                            <EditText
+                                android:id="@+id/idle_time_edit"
+                                style="@style/TableContentEditText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/table_column_height"
+                                android:layout_marginStart="@dimen/table_column_margin"
+                                android:hint="@string/default_idle_time"
+                                android:inputType="number" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                style="@style/TableContentTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/table_column_height"
+                                android:text="@string/frame_rate_title" />
+
+                            <EditText
+                                android:id="@+id/frame_rate_edit"
+                                style="@style/TableContentEditText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/table_column_height"
+                                android:layout_marginStart="@dimen/table_column_margin"
+                                android:hint="@string/default_frame_rate"
+                                android:inputType="number" />
+                        </TableRow>
+                    </TableLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TableContentTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical|start"
+                                android:text="@string/more_params_tile" />
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:id="@+id/more_params_info"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center_vertical|end"
+                                android:background="?android:attr/selectableItemBackgroundBorderless"
+                                android:scaleType="center"
+                                android:src="@drawable/ic_help_outline" />
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/more_params_edit"
+                            style="@style/TableContentEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:hint="@string/default_more_params"
+                            android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
+                            android:maxLines="5"
+                            android:minLines="5" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/start_button_float"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="@color/power_off_color"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/ic_power" />
+
+    <View
+        android:id="@+id/progress_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:clickable="true"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:visibility="gone" />
+</FrameLayout>
