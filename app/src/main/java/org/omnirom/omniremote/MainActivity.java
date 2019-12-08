@@ -1,24 +1,26 @@
 package org.omnirom.omniremote;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.omnirom.omniremote.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +32,7 @@ public class MainActivity extends Activity {
     private List<String> mParameters = new ArrayList<>();
     private String mStartPort;
     private String mStartPassword;
+    private AlertDialog mAboutDialog;
 
     private Runnable mWatchdogRunnable = new Runnable() {
         @Override
@@ -310,5 +313,54 @@ public class MainActivity extends Activity {
                 mParameters.addAll(Arrays.asList(params));
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_about:
+                showAboutDialog();
+                return true;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showAboutDialog() {
+        if (mAboutDialog != null) {
+            mAboutDialog.dismiss();
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setPositiveButton(android.R.string.ok, null)
+                .setTitle(R.string.menu_item_about)
+                .setView(createDialogView())
+                .setPositiveButton(android.R.string.ok, null);
+
+        mAboutDialog = builder.create();
+        mAboutDialog.show();
+    }
+
+    private View createDialogView() {
+        final LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View view = inflater
+                .inflate(R.layout.about_dialog, null);
+
+        view.findViewById(R.id.tigervnc_link).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("https://tigervnc.org/"));
+                startActivity(i);
+            }
+        });
+        return view;
     }
 }

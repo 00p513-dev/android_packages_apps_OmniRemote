@@ -2,4 +2,5 @@
 <resources>
     <color name="power_on_color">#00e000</color>
     <color name="power_off_color">#e00000</color>
+    <color name="omni_logo_color">#a1c729</color>
 </resources>

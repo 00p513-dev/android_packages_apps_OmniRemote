@@ -85,5 +85,8 @@
     <string name="cmd_line_dialog_title">Command Line</string>
     <string name="params_header_tile">Server parameters</string>
     <string name="status_header_tile">VNC server</string>
+    <string name="menu_item_about">About</string>
+    <string name="tigervnc_link">TigerVNC homepage</string>
+    <string name="about_text">OmniRemote will start a TigerVNC server on your Android device to allow remote connection with any VNC viewer application.\n\nDo not use it without a password on an untrusted WiFi network!</string>
 
 </resources>
