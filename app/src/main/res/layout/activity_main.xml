@@ -243,8 +243,8 @@
 
     <ImageButton
         android:id="@+id/start_button_float"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="20dp"
         android:background="@drawable/power_off"
@@ -261,8 +261,8 @@
 
     <ProgressBar
         android:id="@+id/progress"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_gravity="center_vertical|center_horizontal"
         android:visibility="gone" />
 </FrameLayout>
