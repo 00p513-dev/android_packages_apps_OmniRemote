@@ -1,5 +1,6 @@
 package org.omnirom.omniremote;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -88,6 +89,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getActionBar().setElevation(0);
+        getActionBar().setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_TITLE);
 
         findViewById(R.id.start_button_float).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -325,13 +327,16 @@ public class MainActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
             case R.id.menu_item_about:
                 showAboutDialog();
-                return true;
+                break;
             default:
                 break;
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     private void showAboutDialog() {
