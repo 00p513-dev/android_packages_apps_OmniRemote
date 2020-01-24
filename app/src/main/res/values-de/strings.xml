@@ -14,7 +14,7 @@
     <string name="connect_text">Verbinden mit</string>
     <string name="stop_failed">Anhalten fehlgeschlagen</string>
     <string name="starting">Startet\u2026</string>
-    <string name="stopping">\u2026 wird angehalten</string>
+    <string name="stopping">Stoppt\u2026</string>
     <string name="status_title">Status:</string>
     <string name="interface_title">IP-Adresse:</string>
     <string name="port_title">Port:</string>
