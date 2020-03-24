@@ -25,7 +25,7 @@
     <string name="default_more_params">Daha fazla parametre</string>
     <string name="more_params_tile">Daha fazla:</string>
     <string name="more_param_help"><![CDATA[<p>Parametreler, -&lt;param&gt; ile açılabilir
-  <br>Değere sahip parametreler -&lt;param&gt;=&lt;value&gt; olarak belirtilmelidir
+  <br>Değere sahip parametreler -&lt;parametre&gt;=&lt;değer&gt; olarak belirtilmelidir
   <br>Parametre isimleri büyük ve küçük harfe karşı duyarlıdır.
   <br>
   <br>ZlibLevel - 0-9 arasındaki Zlib sıkıştırması değeri (standart=6)
@@ -72,7 +72,7 @@
   <br>
   <br>UseBlacklist - Bir ana makine defalarca doğrulamada başarısız oluyorsa bağlantılarını geçici olarak reddeder. (standart=1)
   <br>
-  <br>Log - Hangi kayıt çıktısının hangi hedefe yönlendirileceğini ve kaydı alınacak çıktının seviyesini belirtir. Format: &lt;log&gt;:&lt;target&gt;:&lt;level&gt;[, ...]. (standart=)
+  <br>Log - Hangi kayıt çıktısının hangi hedefe yönlendirileceğini ve kaydı alınacak çıktının seviyesini belirtir. Biçim: &lt;kayıt&gt;:&lt;hedef&gt;:&lt;seviye&gt;[, ...]. (standart=)
   <br>
   <br>UseIPv6 - Gelen ve giden bağlantılar için IPv6 kullanır. (standart=1)
   <br>
@@ -87,5 +87,5 @@
     <string name="status_header_tile">VNC sunucusu</string>
     <string name="menu_item_about">Hakkında</string>
     <string name="tigervnc_link">TigerVNC ana sayfası</string>
-    <string name="about_text">OmniRemote, VNC görüntüleyicisi uygulamasıyla beraber uzak bağlantıya izin vermek üzere Android cihazınızda bir TigerVNC sunucusu başlatacaktır.\n\nGüvenli olmayan bir kablosuz bağlantı şebekesinde parola olmadan kullanmayınız!</string>
+    <string name="about_text">OmniRemote, VNC görüntüleyicisi uygulamasıyla beraber uzak bağlantıya izin vermek üzere Android cihazınızda bir TigerVNC sunucusu başlatır.\n\nGüvenli olmayan bir kablosuz bağlantı şebekesinde parola olmadan kullanmayınız!</string>
 </resources>
