@@ -1,2 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">OmniRemote</string>
+    <string name="header_text">Inicie ou pare o vncserver</string>
+    <string name="start_button">Ínicio</string>
+    <string name="permission_not_granted">Permissões de armazenamento necessárias</string>
+    <string name="stop_server">Pare</string>
+    <string name="start_server">Ínicio</string>
+    <string name="status_stopped">Parado</string>
+    <string name="install_failed">Instalação falhou</string>
+    <string name="start_failed">Falha no início</string>
+    <string name="not_connected">Não conectado</string>
+    <string name="connect_text">Conectar a</string>
+    <string name="stop_failed">Parar com falha</string>
+    <string name="starting">Iniciando\u2026</string>
+    <string name="stopping">Parando\u2026</string>
+    <string name="status_title">Status:</string>
+    <string name="interface_title">Endereço IP</string>
+    <string name="port_title">Porta:</string>
+    <string name="status_running">Executando</string>
+    <string name="password_title">Senha:</string>
+    <string name="create_passwd_failed">Falha ao criar senha</string>
+    <string name="default_port">5900</string>
+    <string name="default_password">Sem senha</string>
+    <string name="default_more_params">Mais parâmetros</string>
+    <string name="more_params_tile">Mais</string>
+    <string name="help_activity_title">Parâmetros</string>
+    <string name="pid_title">Pid:</string>
+    <string name="cmd_line_dialog_title">Linha de comando</string>
+    <string name="params_header_tile">Parâmetros do servidor</string>
+    <string name="status_header_tile">Servidor VNC</string>
+    <string name="menu_item_about">Sobre</string>
+    <string name="tigervnc_link">Página inicial do TigerVNC</string>
+    <string name="about_text">OmniRemote irá iniciar um servidor TigerVNC no seu dispositivo Android para permitir conexão remota com qualquer aplicativo de visualizador do VNC.\n\nNão a use sem uma senha em uma rede Wi-Fi não confiável!</string>
+</resources>

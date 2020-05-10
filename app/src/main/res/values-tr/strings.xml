@@ -24,7 +24,7 @@
     <string name="default_password">Parola yok</string>
     <string name="default_more_params">Daha fazla parametre</string>
     <string name="more_params_tile">Daha fazla:</string>
-    <string name="more_param_help"><![CDATA[<p>Parametreler, -&lt;param&gt; ile açılabilir
+    <string name="more_param_help"><![CDATA[<p>Parametreler, -&lt;parametre&gt; ile açılabilir
   <br>Değere sahip parametreler -&lt;parametre&gt;=&lt;değer&gt; olarak belirtilmelidir
   <br>Parametre isimleri büyük ve küçük harfe karşı duyarlıdır.
   <br>
