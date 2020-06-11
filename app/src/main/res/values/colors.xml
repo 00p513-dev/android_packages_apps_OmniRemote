@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="power_on_color">#00e000</color>
-    <color name="power_off_color">#e00000</color>
+    <color name="power_off_color">#2E7D32</color>
+    <color name="power_on_color">#C62828</color>
     <color name="omni_logo_color">#a1c729</color>
 </resources>

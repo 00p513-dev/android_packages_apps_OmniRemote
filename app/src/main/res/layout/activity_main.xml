@@ -248,7 +248,7 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="20dp"
         android:background="@drawable/power_off"
-        android:src="@drawable/ic_power" />
+        android:src="@drawable/ic_server_on" />
 
     <View
         android:id="@+id/progress_overlay"
