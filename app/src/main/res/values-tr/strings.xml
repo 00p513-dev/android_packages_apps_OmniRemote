@@ -87,5 +87,5 @@
     <string name="status_header_tile">VNC sunucusu</string>
     <string name="menu_item_about">Hakkında</string>
     <string name="tigervnc_link">TigerVNC ana sayfası</string>
-    <string name="about_text">OmniRemote, VNC görüntüleyicisi uygulamasıyla beraber uzak bağlantıya izin vermek üzere Android cihazınızda bir TigerVNC sunucusu başlatır.\n\nGüvenli olmayan bir kablosuz bağlantı şebekesinde parola olmadan kullanmayınız!</string>
+    <string name="about_text">OmniRemote, VNC görüntüleyicisi uygulamasıyla beraber uzak bağlantıya izin vermek üzere Android cihazınızda bir TigerVNC sunucusu başlatır.\n\nGüvenli olmayan bir kablosuz bağlantı ağında parola olmadan kullanmayınız!</string>
 </resources>
