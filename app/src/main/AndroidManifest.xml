@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK " />
+    <protected-broadcast android:name="org.omnirom.omniremote.ACTION_STATUS" />
 
     <application
         android:allowBackup="true"
