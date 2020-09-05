@@ -31,8 +31,10 @@ LOCAL_USE_AAPT2 := true
 LOCAL_PACKAGE_NAME := OmniRemote
 LOCAL_CERTIFICATE := platform
 LOCAL_MODULE_TAGS := optional
-#LOCAL_DEX_PREOPT := false
-LOCAL_SDK_VERSION := current
-LOCAL_MIN_SDK_VERSION := 29
-
+LOCAL_PRIVILEGED_MODULE := true
+ifneq (,$(wildcard frameworks/base))
+  LOCAL_PRIVATE_PLATFORM_APIS := true
+else
+  LOCAL_SDK_VERSION := system_current
+endif
 include $(BUILD_PACKAGE)
