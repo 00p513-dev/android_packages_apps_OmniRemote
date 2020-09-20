@@ -121,7 +121,7 @@ public class MainActivity extends Activity {
         channel.setSound(null, // silent
                 new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION).build());
         channel.setDescription(description);
-        channel.setBlockableSystem(true);
+        channel.setBlockable(true);
         getNotificationManager().createNotificationChannel(channel);
     }
 
