@@ -67,7 +67,7 @@
                         style="@style/TableContentTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/table_column_height"
-                        android:drawableStart="@drawable/ic_wifi"
+                        android:drawableStart="@drawable/ic_network_ip"
                         android:drawablePadding="8dp"
                         android:text="@string/interface_title" />
 

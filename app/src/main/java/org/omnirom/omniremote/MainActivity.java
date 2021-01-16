@@ -271,10 +271,12 @@ public class MainActivity extends Activity {
     }
 
     private void updateButton() {
-        if (Utils.isRunning(this)) {
+        if (!Utils.isConnected()) {
+            ((ImageView) findViewById(R.id.start_button_float)).setBackgroundResource(R.drawable.power_disabled);
+            ((ImageView) findViewById(R.id.start_button_float)).setImageDrawable(getResources().getDrawable(R.drawable.ic_server_on));
+        } else if (Utils.isRunning(this)) {
             ((ImageView) findViewById(R.id.start_button_float)).setBackgroundResource(R.drawable.power_on);
             ((ImageView) findViewById(R.id.start_button_float)).setImageDrawable(getResources().getDrawable(R.drawable.ic_server_off));
-
         } else {
             ((ImageView) findViewById(R.id.start_button_float)).setBackgroundResource(R.drawable.power_off);
             ((ImageView) findViewById(R.id.start_button_float)).setImageDrawable(getResources().getDrawable(R.drawable.ic_server_on));
