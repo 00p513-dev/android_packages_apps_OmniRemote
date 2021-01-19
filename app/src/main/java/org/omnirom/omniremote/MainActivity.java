@@ -20,19 +20,15 @@ package org.omnirom.omniremote;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -51,13 +47,8 @@ import java.util.List;
 
 public class MainActivity extends Activity {
     private static final String TAG = Utils.TAG;
-    private static final int NOTIFICATION_ID = 1;
-    private static final String NOTIFICATION_CHANNEL_ID = "vncserver";
-
     private Handler mHandler = new Handler();
     private List<String> mParameters = new ArrayList<>();
-    private String mStartPort;
-    private String mStartPassword;
     private AlertDialog mAboutDialog;
 
     private Runnable mWatchdogRunnable = new Runnable() {
@@ -97,49 +88,17 @@ public class MainActivity extends Activity {
                         showProgress(false);
                         updateStatus();
                         startWatchdog();
-
-                        createOngoingNotification();
                     }
                     if (extraStatus.equals(VNCServerService.EXTRA_STATUS_STOPPED)) {
                         findViewById(R.id.start_button_float).setEnabled(true);
                         showProgress(false);
                         updateStatus();
                         stopWatchDog();
-
-                        getNotificationManager().cancel(NOTIFICATION_ID);
                     }
                 }
             }
         }
     };
-
-    private void createNotificationChannel() {
-        CharSequence name = getString(R.string.notification_channel_name);
-        String description = getString(R.string.notification_channel_description);
-        int importance = NotificationManager.IMPORTANCE_LOW;
-        NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance);
-        channel.setSound(null, // silent
-                new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION).build());
-        channel.setDescription(description);
-        channel.setBlockable(true);
-        getNotificationManager().createNotificationChannel(channel);
-    }
-
-    private void createOngoingNotification() {
-        getNotificationManager().cancel(NOTIFICATION_ID);
-
-        Notification.Builder notification = new Notification.Builder(this,NOTIFICATION_CHANNEL_ID)
-                .setContentTitle(getString(R.string.notification_ongoing_title))
-                .setSmallIcon(R.drawable.ic_server_on)
-                .setShowWhen(true);
-
-        Intent shoActivityIntent = new Intent(this, MainActivity.class);
-        shoActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        notification.setContentIntent(PendingIntent.getActivity(this, shoActivityIntent.hashCode(),
-                shoActivityIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-
-        getNotificationManager().notify(NOTIFICATION_ID, notification.build());
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,10 +114,7 @@ public class MainActivity extends Activity {
                     setStatusMessage(getResources().getString(R.string.stopping));
                     findViewById(R.id.start_button_float).setEnabled(false);
                     showProgress(true);
-
-                    Intent start = new Intent(MainActivity.this, VNCServerService.class);
-                    start.setAction(VNCServerService.ACTION_STOP);
-                    startService(start);
+                    stopServer();
                 } else {
                     startServer();
                 }
@@ -190,13 +146,18 @@ public class MainActivity extends Activity {
                     }
                 });
 
-        createNotificationChannel();
         restorePreferences();
+
+        if (!Utils.isFirstStartDone(this)) {
+            Utils.setFirstStartDone(this);
+            showAboutDialog();
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        Log.d(TAG, "MainActivity:onResume");
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(VNCServerService.ACTION_ERROR);
@@ -212,7 +173,11 @@ public class MainActivity extends Activity {
     @Override
     public void onPause() {
         super.onPause();
+        Log.d(TAG, "MainActivity:onPause");
+
         stopWatchDog();
+        // we want to save actual mParameters
+        createParamterList();
         savePreferences();
         try {
             unregisterReceiver(mReceiver);
@@ -230,18 +195,9 @@ public class MainActivity extends Activity {
             return;
         }
 
-        mStartPort = null;
-        mStartPassword = null;
         createParamterList();
 
-        String port = ((EditText) findViewById(R.id.port_edit)).getText().toString();
-        if (!TextUtils.isEmpty(port)) {
-            mStartPort = port;
-        }
         String password = ((EditText) findViewById(R.id.password_edit)).getText().toString();
-        if (!TextUtils.isEmpty(password)) {
-            mStartPassword = password;
-        }
 
         savePreferences();
 
@@ -256,18 +212,13 @@ public class MainActivity extends Activity {
         startService(start);
     }
 
-    private String getPort() {
-        if (!TextUtils.isEmpty(mStartPort)) {
-            return mStartPort;
+    private void stopServer() {
+        if (!Utils.isRunning(this)) {
+            return;
         }
-        return "5900";
-    }
-
-    private String getPassword() {
-        if (!TextUtils.isEmpty(mStartPassword)) {
-            return mStartPassword;
-        }
-        return "";
+        Intent stop = new Intent(MainActivity.this, VNCServerService.class);
+        stop.setAction(VNCServerService.ACTION_STOP);
+        startService(stop);
     }
 
     private void updateButton() {
@@ -300,7 +251,7 @@ public class MainActivity extends Activity {
 
     private void setConnectedMessage() {
         if (Utils.isRunning(this)) {
-            ((TextView) findViewById(R.id.interface_text)).setText(Utils.getIPAddress() + " : " + getPort());
+            ((TextView) findViewById(R.id.interface_text)).setText(Utils.getConnectedStatusString(this));
         } else {
             ((TextView) findViewById(R.id.interface_text)).setText("");
         }
@@ -316,6 +267,10 @@ public class MainActivity extends Activity {
         editor.putString("port", ((TextView) findViewById(R.id.port_edit)).getText().toString());
         editor.putString("password", ((TextView) findViewById(R.id.password_edit)).getText().toString());
         editor.putString("more", ((TextView) findViewById(R.id.more_params_edit)).getText().toString().trim());
+
+        // this will be used if server is started from outside
+        editor.putString("runningParams", TextUtils.join(" ", mParameters));
+
         editor.commit();
     }
 
@@ -383,7 +338,7 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        inflater.inflate(R.menu.main, menu);
         return true;
     }
 
@@ -431,10 +386,4 @@ public class MainActivity extends Activity {
         });
         return view;
     }
-
-    private NotificationManager getNotificationManager() {
-        return (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-    }
-
-
 }

@@ -15,14 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
- package org.omnirom.omniremote;
+package org.omnirom.omniremote;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioAttributes;
 import android.os.FileObserver;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.os.UserHandle;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -43,6 +50,11 @@ public class VNCServerService extends Service {
     public static final String EXTRA_STATUS = "status";
     public static final String EXTRA_STATUS_STARTED = "started";
     public static final String EXTRA_STATUS_STOPPED = "stopped";
+
+    private static final int NOTIFICATION_ID = 1;
+    private static final int NOTIFICATION_STOP_ID = 2;
+    private static final String NOTIFICATION_CHANNEL_ID = "vncserver";
+
     private FileObserver mFileObserver;
 
     private PowerManager.WakeLock mWakeLock;
@@ -89,6 +101,7 @@ public class VNCServerService extends Service {
         PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG + ":wakelock");
         mScreenLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, TAG + ":screenLock");
+        createNotificationChannel();
     }
 
     @Override
@@ -113,7 +126,11 @@ public class VNCServerService extends Service {
                 if (Utils.isRunning(this) || mWorkInProgress) {
                     return START_NOT_STICKY;
                 }
-
+                if (!Utils.isConnected()) {
+                    sendErrorBrodcast(EXTRA_ERROR_START_FAILED);
+                    stopSelf();
+                    return START_NOT_STICKY;
+                }
                 String password = intent.getStringExtra("password");
                 List<String> parameter = new ArrayList<>();
                 if (intent.hasExtra("parameter")) {
@@ -148,12 +165,16 @@ public class VNCServerService extends Service {
         Intent errorIntent = new Intent(ACTION_ERROR);
         errorIntent.putExtra(EXTRA_ERROR, error);
         sendBroadcast(errorIntent);
+        // widget needs to update status and is not a broadcast receiver
+        WidgetHelper.updateWidgets(getApplicationContext());
     }
 
     private void sendStatusBrodcast(String status) {
         Intent errorIntent = new Intent(ACTION_STATUS);
         errorIntent.putExtra(EXTRA_STATUS, status);
         sendBroadcast(errorIntent);
+        // widget needs to update status and is not a broadcast receiver
+        WidgetHelper.updateWidgets(getApplicationContext());
     }
 
     private void doStopServer() {
@@ -175,6 +196,7 @@ public class VNCServerService extends Service {
             } else {
                 sendStatusBrodcast(EXTRA_STATUS_STOPPED);
             }
+            getNotificationManager().cancel(NOTIFICATION_ID);
         } catch (Exception e) {
             sendErrorBrodcast(EXTRA_ERROR_STOP_FAILED);
         } finally {
@@ -200,6 +222,7 @@ public class VNCServerService extends Service {
                         mFileObserver.stopWatching();
                         mHandler.removeCallbacks(mWatchdogRunnable);
                         mWorkInProgress = false;
+                        createOngoingNotification();
                     }
                 }
             };
@@ -224,6 +247,7 @@ public class VNCServerService extends Service {
                 Log.i(TAG, "Aquire screen lock");
                 mScreenLock.acquire();
                 mWorkInProgress = false;
+                createOngoingNotification();
             }
         } catch (Exception e) {
             mFileObserver.stopWatching();
@@ -233,5 +257,45 @@ public class VNCServerService extends Service {
                 stopSelf();
             }
         }
+    }
+
+    private NotificationManager getNotificationManager() {
+        return (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+    }
+
+    private void createOngoingNotification() {
+        getNotificationManager().cancel(NOTIFICATION_ID);
+
+        Notification.Builder notification = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
+                .setContentTitle(getString(R.string.notification_ongoing_title))
+                .setContentText(Utils.getConnectedStatusString(this))
+                .setSmallIcon(R.drawable.ic_server_on)
+                .setShowWhen(true);
+
+        PendingIntent stopIntent = PendingIntent.getService(this, NOTIFICATION_STOP_ID,
+                new Intent(this, VNCServerService.class)
+                    .setAction(VNCServerService.ACTION_STOP),
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.addAction(R.drawable.ic_server_off, getResources().getString(R.string.stop_server),
+                stopIntent);
+
+        Intent shoActivityIntent = new Intent(this, MainActivity.class);
+        shoActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        notification.setContentIntent(PendingIntent.getActivity(this, shoActivityIntent.hashCode(),
+                shoActivityIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+
+        getNotificationManager().notify(NOTIFICATION_ID, notification.build());
+    }
+
+    private void createNotificationChannel() {
+        CharSequence name = getString(R.string.notification_channel_name);
+        String description = getString(R.string.notification_channel_description);
+        int importance = NotificationManager.IMPORTANCE_LOW;
+        NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance);
+        channel.setSound(null, // silent
+                new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION).build());
+        channel.setDescription(description);
+        channel.setBlockable(true);
+        getNotificationManager().createNotificationChannel(channel);
     }
 }

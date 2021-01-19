@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK " />
+
     <protected-broadcast android:name="org.omnirom.omniremote.ACTION_STATUS" />
 
     <application
@@ -18,30 +19,43 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan"
             tools:ignore="WrongManifestParent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".HelpActivity"
-            android:label="@string/help_activity_title">
+            android:exported="false"
+            android:label="@string/help_activity_title"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <service
             android:name=".VNCServerService"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
+
+        <receiver
+            android:name=".ShareWidgetProvider"
+            android:exported="false"
+            android:icon="@mipmap/ic_launcher">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/share_widget_info" />
+        </receiver>
     </application>
 </manifest>

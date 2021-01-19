@@ -1,0 +1,10 @@
+<!-- 21600000 = 6 hours in milliseconds -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialLayout="@layout/widget_share"
+    android:minWidth="@dimen/widget_width"
+    android:minHeight="@dimen/widget_height"
+    android:minResizeHeight="@dimen/table_column_height"
+    android:minResizeWidth="@dimen/min_widget_resize_width"
+    android:previewImage="@drawable/ic_widget_running"
+    android:resizeMode="vertical|horizontal"
+    android:updatePeriodMillis="0" />

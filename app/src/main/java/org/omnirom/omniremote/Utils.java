@@ -18,6 +18,9 @@
 package org.omnirom.omniremote;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -29,6 +32,7 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,6 +40,8 @@ import androidx.annotation.NonNull;
 
 public class Utils {
     public static final String TAG = "OmniRemote";
+    public static final boolean DEBUG = true;
+    private static final String FIRST_START_DONE = "first_start_done";
 
     public static File getRootDir(Context context) {
         return new File("/system/bin/");
@@ -188,5 +194,57 @@ public class Utils {
             getPasswordPath(context).delete();
         }
         return killed;
+    }
+
+    private static String getRunningPort(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String port = prefs.getString("port", "5900");
+        if (TextUtils.isEmpty(port)) {
+            port = "5900";
+        }
+        return port;
+    }
+
+    public static String getRunningPassword(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getString("password", "");
+    }
+
+    public static List<String> getRunningParameters(Context context) {
+        List<String> paramList = new ArrayList<>();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String params = prefs.getString("runningParams", "");
+        paramList.addAll(Arrays.asList(params.split(" ")));
+        return paramList;
+    }
+
+    public static String getConnectedStatusString(Context context) {
+        return Utils.getIPAddress() + ":" + Utils.getRunningPort(context);
+    }
+
+    public static Intent getStartServerConfig(Context context) {
+        List<String> parameters = Utils.getRunningParameters(context);
+        String password = Utils.getRunningPassword(context);
+        Intent start = new Intent(context, VNCServerService.class);
+        start.setAction(VNCServerService.ACTION_START);
+        start.putExtra("parameter", parameters.toArray(new String[parameters.size()]));
+        start.putExtra("password", password);
+        return start;
+    }
+
+
+    public static boolean isFirstStartDone(Context context) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPrefs.getBoolean(FIRST_START_DONE, false);
+    }
+
+    public static void setFirstStartDone(Context context) {
+        if (!isFirstStartDone(context)) {
+            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putBoolean(FIRST_START_DONE, true);
+            editor.commit();
+            WidgetHelper.updateWidgets(context);
+        }
     }
 }
