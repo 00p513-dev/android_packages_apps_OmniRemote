@@ -45,8 +45,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends Activity {
-    private static final String TAG = Utils.TAG;
+import androidx.appcompat.app.AppCompatActivity;
+
+import static org.omnirom.omniremote.Utils.TAG;
+
+public class MainActivity extends AppCompatActivity {
     private Handler mHandler = new Handler();
     private List<String> mParameters = new ArrayList<>();
     private AlertDialog mAboutDialog;
@@ -104,8 +107,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getActionBar().setElevation(0);
-        getActionBar().setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_TITLE);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setElevation(0);
 
         findViewById(R.id.start_button_float).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -350,6 +354,9 @@ public class MainActivity extends Activity {
                 break;
             case R.id.menu_item_about:
                 showAboutDialog();
+                break;
+            case R.id.menu_item_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
             default:
                 break;

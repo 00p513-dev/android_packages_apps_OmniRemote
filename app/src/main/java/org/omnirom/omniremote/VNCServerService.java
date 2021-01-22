@@ -38,8 +38,9 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 
+import static org.omnirom.omniremote.Utils.TAG;
+
 public class VNCServerService extends Service {
-    private static final String TAG = Utils.TAG;
     public static final String ACTION_START = "org.omnirom.omniremote.ACTION_START";
     public static final String ACTION_STOP = "org.omnirom.omniremote.ACTION_STOP";
     public static final String ACTION_ERROR = "org.omnirom.omniremote.ACTION_ERROR";

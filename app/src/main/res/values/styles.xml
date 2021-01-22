@@ -1,26 +1,33 @@
 <resources>
 
-    <style name="AppTheme" parent="@android:style/Theme.DeviceDefault.Settings">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/main_background_light</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="TableContentTitle" parent="TextAppearance.AppCompat.Subhead" >
+    <style name="TableContentTitle" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:gravity">center_vertical</item>
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
     </style>
 
-    <style name="TableContentText" parent="TextAppearance.AppCompat.Subhead" >
+    <style name="TableContentText" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
     </style>
 
-    <style name="TableContentEditText" parent="TextAppearance.AppCompat.Subhead" >
+    <style name="TableContentEditText" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
     </style>
 
-    <style name="HelpText" parent="TextAppearance.AppCompat.Body1" >
+    <style name="HelpText" parent="TextAppearance.AppCompat.Body1">
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>

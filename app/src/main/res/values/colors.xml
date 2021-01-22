@@ -4,4 +4,7 @@
     <color name="power_on_color">#C62828</color>
     <color name="omni_logo_color">#a1c729</color>
     <color name="power_disabled_color">#666</color>
+    <color name="colorPrimary">@android:color/white</color>
+    <color name="colorPrimaryDark">@android:color/white</color>
+    <color name="main_background_light">@android:color/white</color>
 </resources>

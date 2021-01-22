@@ -42,6 +42,7 @@ public class Utils {
     public static final String TAG = "OmniRemote";
     public static final boolean DEBUG = true;
     private static final String FIRST_START_DONE = "first_start_done";
+    public static final String AUTO_START_SERVICE = "auto_start_service";
 
     public static File getRootDir(Context context) {
         return new File("/system/bin/");
@@ -232,7 +233,6 @@ public class Utils {
         return start;
     }
 
-
     public static boolean isFirstStartDone(Context context) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPrefs.getBoolean(FIRST_START_DONE, false);
@@ -241,10 +241,18 @@ public class Utils {
     public static void setFirstStartDone(Context context) {
         if (!isFirstStartDone(context)) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-            SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putBoolean(FIRST_START_DONE, true);
-            editor.commit();
+            sharedPrefs.edit().putBoolean(FIRST_START_DONE, true).commit();
             WidgetHelper.updateWidgets(context);
         }
+    }
+
+    public static boolean isAutoStart(Context context) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPrefs.getBoolean(AUTO_START_SERVICE, false);
+    }
+
+    public static void setAutoStart(Context context, boolean value) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        sharedPrefs.edit().putBoolean(AUTO_START_SERVICE, value).commit();
     }
 }

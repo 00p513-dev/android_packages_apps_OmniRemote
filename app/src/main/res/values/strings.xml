@@ -91,5 +91,8 @@
     <string name="notification_channel_name">VNC server running</string>
     <string name="notification_channel_description"></string>
     <string name="notification_ongoing_title">VNC server running</string>
-
+    <string name="menu_item_settings">Settings</string>
+    <string name="title_settings">Settings</string>
+    <string name="auto_start_service_title">Start on boot</string>
+    <string name="auto_start_service_summary">Auto start service on boot if network is available</string>
 </resources>

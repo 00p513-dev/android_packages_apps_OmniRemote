@@ -24,6 +24,7 @@ LOCAL_SRC_FILES := $(call all-java-files-under, app/src/main/java)
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
     androidx.appcompat_appcompat \
+    androidx.preference_preference \
     com.google.android.material_material
 LOCAL_AAPT_FLAGS := --auto-add-overlay
 LOCAL_USE_AAPT2 := true

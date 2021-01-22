@@ -26,9 +26,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-public class ShareWidgetProvider extends AppWidgetProvider {
-    private static final String TAG = Utils.TAG;
+import static org.omnirom.omniremote.Utils.TAG;
 
+public class ShareWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);

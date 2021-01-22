@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2020 The OmniROM Project
+ *  Copyright (C) 2021 The OmniROM Project
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,23 +19,35 @@ package org.omnirom.omniremote;
 
 import android.app.Activity;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+import android.preference.PreferenceFragment;
 import android.text.Html;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import org.omnirom.omniremote.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceFragmentCompat;
 
-public class HelpActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
+    public static class SettingsFragment extends PreferenceFragmentCompat {
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            addPreferencesFromResource(R.xml.settings);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_help);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setElevation(0);
-        ((TextView) findViewById(R.id.more_param_help)).setText(
-                Html.fromHtml(getResources().getString(R.string.more_param_help)));
+    }
+
+    @Override
+    public void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment())
+                .commit();
     }
 
     @Override
