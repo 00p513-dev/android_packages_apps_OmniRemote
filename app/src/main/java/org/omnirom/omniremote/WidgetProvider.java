@@ -28,7 +28,7 @@ import androidx.annotation.NonNull;
 
 import static org.omnirom.omniremote.Utils.TAG;
 
-public class ShareWidgetProvider extends AppWidgetProvider {
+public class WidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);

@@ -11,11 +11,13 @@ import static org.omnirom.omniremote.Utils.TAG;
 public class AutoStartService extends JobService {
     @Override
     public boolean onStartJob(JobParameters params) {
-        if (Utils.isConnected() && !Utils.isRunning(getApplicationContext())) {
-            if (Utils.DEBUG) Log.d(TAG, "onStartJob");
+        if (Utils.DEBUG) Log.d(TAG, "AutoStartService onStartJob");
+        if (Utils.isConnected() && Utils.isAutoStart(getApplicationContext()) && !Utils.isRunning(getApplicationContext())) {
             Intent start = Utils.getStartServerConfig(getApplicationContext());
             startServiceAsUser(start, UserHandle.CURRENT);
         }
+        // update widget state
+        WidgetHelper.updateWidgets(getApplicationContext());
         return false;
     }
 

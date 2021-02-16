@@ -58,6 +58,7 @@ public class WidgetHelper {
         updateViews.setImageViewResource(R.id.share_badge_image, serviceRunning ? R.drawable.ic_widget_running : R.drawable.ic_widget_stopped);
         if (!Utils.isConnected()) {
             updateViews.setTextViewText(R.id.share_badge_status_ip, context.getResources().getString(R.string.not_connected));
+            updateViews.setOnClickPendingIntent(R.id.share_badge_image, activity);
         } else {
             if (serviceRunning) {
                 if (minimalSize) {
@@ -105,7 +106,7 @@ public class WidgetHelper {
 
     private static int[] findAppWidgetIds(Context context) {
         AppWidgetManager manager = AppWidgetManager.getInstance(context);
-        ComponentName widget = new ComponentName(context, ShareWidgetProvider.class);
+        ComponentName widget = new ComponentName(context, WidgetProvider.class);
         return manager.getAppWidgetIds(widget);
     }
 

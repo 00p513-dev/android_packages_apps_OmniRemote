@@ -50,7 +50,7 @@ public class BootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
             if (context != null) {
-                if (Utils.isFirstStartDone(context) && Utils.isAutoStart(context)){
+                if (Utils.isFirstStartDone(context)){
                     if (Utils.DEBUG) Log.d(TAG, "onReceive " + intent.getAction());
                     scheduleCheckUpdates(context);
                 }
