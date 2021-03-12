@@ -88,4 +88,6 @@
     <string name="menu_item_about">Info</string>
     <string name="tigervnc_link">TigerVNC Homepage</string>
     <string name="about_text">OmniRemote startet einen TigerVNC Server auf Ihrem Android-Gerät, um eine Remote-Verbindung mit einer beliebigen VNC-Viewer-Anwendung zu ermöglichen.\n\nVerwenden Sie es nicht ohne ein Passwort in einem nicht vertrauenswürdigen WLAN-Netzwerk!</string>
+    <string name="notification_channel_name">VNC-Server läuft</string>
+    <string name="notification_ongoing_title">VNC-Server läuft</string>
 </resources>

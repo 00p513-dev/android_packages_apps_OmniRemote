@@ -88,4 +88,6 @@
     <string name="menu_item_about">Informace</string>
     <string name="tigervnc_link">Domovská stránka TigerVNC</string>
     <string name="about_text">OmniRemote spustí na vašem zařízení Android server TigerVNC, který umožňuje vzdálené připojení s jakýmkoliv prohlížečem VNC. \n\nNepoužívejte bez hesla v nedůvěryhodné síti WiFi!</string>
+    <string name="notification_channel_name">Server VNC je spuštěn</string>
+    <string name="notification_ongoing_title">Server VNC je spuštěn</string>
 </resources>

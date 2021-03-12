@@ -88,4 +88,6 @@
     <string name="menu_item_about">概要</string>
     <string name="tigervnc_link">TigerVNC ウェブページ</string>
     <string name="about_text">OmniRemote は Android 端末で TigerVNC サーバーを起動し、VNC ビューアーアプリとのリモート接続を許可します。\n\n信頼されていない Wi-Fi ネットワークではパスワード無しで使用しないで下さい。</string>
+    <string name="notification_channel_name">VNC サーバーを実行中</string>
+    <string name="notification_ongoing_title">VNC サーバーを実行中</string>
 </resources>
