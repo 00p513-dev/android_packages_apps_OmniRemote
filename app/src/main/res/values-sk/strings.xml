@@ -1,2 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">OmniRemote</string>
+    <string name="header_text">Spustiť alebo ukončiť vncserver</string>
+    <string name="start_button">Spustiť</string>
+    <string name="permission_not_granted">Je potrebné povolenie pre prístup k úložisku</string>
+    <string name="stop_server">Zastaviť</string>
+    <string name="start_server">Spustiť</string>
+    <string name="status_stopped">Zastavené</string>
+    <string name="install_failed">Inštalácia zlyhala</string>
+    <string name="start_failed">Spustenie sa nepodarilo</string>
+    <string name="not_connected">Nepripojené</string>
+    <string name="connect_text">Pripojiť k</string>
+    <string name="stop_failed">Ukončenie sa nepodarilo</string>
+    <string name="starting">Spoúšťanie\u2026</string>
+    <string name="stopping">Ukončovanie\u2026</string>
+    <string name="status_title">Stav:</string>
+    <string name="interface_title">Adresa IP:</string>
+    <string name="port_title">Port:</string>
+    <string name="status_running">Spustené</string>
+    <string name="password_title">Heslo:</string>
+    <string name="create_passwd_failed">Vytvorenie hesla sa nepodarilo</string>
+    <string name="default_port">5900</string>
+    <string name="default_password">Heslo nie je nastavené</string>
+    <string name="default_more_params">Ďalšie parametre</string>
+    <string name="more_params_tile">Vviac: </string>
+    <string name="more_param_help"><![CDATA[<p>Parametre možno zapnúť pomocou -&lt;param&gt;
+  <br>Parametre s hodnotou musia byť zadané ako -&lt;param&gt;=&lt;value&gt;
+  <br>Názvy parametrov nerozlišujú veľké a malé písmená.
+  <br>
+  <br>ZlibLevel - Úroveň kompresie Zlib 0-9 (predvolené=6)
+  <br>
+  <br>ImprovedHextile - Použite vylepšený kompresný algoritmus pre kódovanie Hextile, ktorý dosahuje lepších kompresných pomerov vďaka nákladom na viac času CPU (predvolené=1)
+  <br>
+  <br>SendCutText - Pošle klientovi zmeny schránky. (predvolené=1)
+  <br>
+  <br>AcceptCutText - Prijíma aktualizácie schránky od klientov. (predvolené=1)
+  <br>
+  <br>AcceptPointerEvents - Prijíma ukazovatele stlačenie a uvoľnite udalosti od klientov. (predvolené=1)
+  <br>
+  <br>AcceptKeyEvents - Prijíma udalosti stlačenie a uvoľnenie udalostí od klientov. (predvolené=1)
+  <br>
+  <br>DisconnectClients - Pokiaľ nie je prichádzajúce pripojenie zdieľané, odpája existujúcich klientov. Ak je kombinované s NeverShared, budú nové pripojenia odmietnuté, kým bude aktívny klient (predvolené=1)
+  <br>
+  <br>NeverShared - Nikdy nepovažuje prichádzajúce pripojenie za zdieľané, bez ohľadu na nastavenie zadané klientom (predvolené=0)
+  <br>
+  <br>AlwaysShared - S prichádzajúcimi pripojeniami sa vždy zaobchádza ako so zdieľanými, bez ohľadu na nastavenie zadané klientom (predvolené=0)
+  <br>
+  <br>Protocol3.3 - Pre spätnú kompatibilitu s klientmi so zlým správaním sa vždy použije protokol verzia 3.3 (predvolené=0)
+  <br>
+  <br>FrameRate - Maximálny počet aktualizácií za sekundu odoslaných každému klientovi (predvolené=60)
+  <br>
+  <br>CompareFB - Vykonáva porovnávanie pixelov na framebufferi, aby sa znížil počet aktualizácií (0: nikdy, 1: vždy, 2: automaticky) (predvolené=2)
+  <br>
+  <br>ClientWaitTimeMillis - Počet milisekúnd, kedy sa čaká na klienta, ktorý už neodpovedá (predvolené=20000)
+  <br>
+  <br>MaxIdleTime - Ukončenie po sekundách nečinnosti užívateľa (predvolené=0)
+  <br>
+  <br>MaxConnectionTime - Ukončí sa, keď je klient po dobu niekoľkých sekúnd pripojený (predvolené=0)
+  <br>
+  <br>MaxDisconnectionTime - Ukončí sa, ak nie je po dobu niekoľkých sekúnd pripojený žiadny klient (predvolené=0)
+  <br>
+  <br>IdleTimeout - Počet sekúnd, po ktorých bude prerušené nečinné pripojenie VNC (nula znamená žiadny časový limit) (predvolené=0)
+  <br>
+  <br>MaxCutText - Maximálna povolená dĺžka prichádzajúcej aktualizácie schránky (predvolené=262144)
+  <br>
+  <br>RemapKeys - Zoznam prichádzajúcich kľúčových slov oddelených čiarkami k remapovaniu. Mapovanie je vyjadrené ako dve hexadecimálne hodnoty, predponou 0x a oddelené -&gt; (predvolené=)
+  <br>
+  <br>BlacklistTimeout - Počiatočný časový limit sa použije, keď je hostiteľ na prvom zozname. Hostiteľ sa nemôže znova pokúsiť o pripojenie, kým nevyprší časový limit. (predvolené=10)
+  <br>
+  <br>BlacklistThreshold - Počet neoverených pokusov o pripojenie povolených od ľubovoľného hostiteľa pred tým, než je tento hostiteľ uvedený na čiernej listine (predvolené=5)
+  <br>
+  <br>UseBlacklist - Ak sa opakovane nepodarí overenie, dočasne odmietnite pripojenie od hostiteľa. (predvolené=1)
+  <br>
+  <br>Log - Určuje, ktorý výstup protokolu by mal byť smerovaný na ktorý cieľový logger a úroveň výstupu do protokolu. formát je &lt;log&gt;:&lt;target&gt;:&lt;level&gt;[, ...]. (predvolené=)
+  <br>
+  <br>UseIPv6 - Pre prichádzajúce a odchádzajúce pripojenia použije IPv6. (predvolené=1)
+  <br>
+  <br>UseIPv4 - Pre prichádzajúce a odchádzajúce pripojenia použije IPv4. (predvolené=1)
+  <br>
+  <br>rfbport - TCP port pre počúvanie protokolu RFB (predvolené=5900)
+</p>]]></string>
+    <string name="help_activity_title">Parametre</string>
+    <string name="pid_title">Pid:</string>
+    <string name="cmd_line_dialog_title">Príkazový riadok</string>
+    <string name="params_header_tile">Parametre servera</string>
+    <string name="status_header_tile">VNC server</string>
+    <string name="menu_item_about">O aplikácii</string>
+    <string name="tigervnc_link">Domovská stránka TigerVNC</string>
+    <string name="about_text">OmniRemote spustí na vašom zariadení Android server TigerVNC, ktorý umožňuje vzdialené pripojenie s akýmkoľvek prehliadačom VNC.\n\nNepoužívejte bez hesla v nedôveryhodné sieti WiFi!</string>
+    <string name="notification_channel_name">Server VNC je spustený</string>
+    <string name="notification_ongoing_title">Server VNC je spustený</string>
+</resources>
